@@ -11,13 +11,13 @@ Lib for manipulation user data in Electron
 
 # Usage
 
-    ```typescript
+```typescript
     import {import as Import, export as Export} from "electron-user-data";
     //...
     const data = await Import("...userData");
     data.cookies[0][0].value = "Hi";
     await Export("...userData2");
-    ```
+```
 
 # API
 
