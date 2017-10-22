@@ -37,7 +37,7 @@ export const Import = async (pathTo: string, data: IData) => {
         const lsDb = createDatabase(localstoragePath + "/" + localstorage.address + "_0.localstorage");
         await lsDb.run(LocalStorageTableCreateSQL);
         for (const item of localstorage.items) {
-            await lsDb.run(`insert into ItemTable values(?,?)`, [item.key, item.value]);
+            await lsDb.run(`insert into ItemTable values(?,?)`, [item.key, new Buffer(item.value)]);
         }
         await lsDb.close();
     }
