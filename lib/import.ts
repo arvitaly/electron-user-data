@@ -1,4 +1,4 @@
-import { ICookies, ILocalStorages } from ".";
+import { IData } from ".";
 import { createDir, removeDir } from "./fs";
 import createDatabase from "./Sqlite";
 export const CookiesTableCreationSQL =
@@ -12,10 +12,7 @@ export const LocalStorageTableCreateSQL =
     `CREATE TABLE ItemTable
     (key TEXT UNIQUE ON CONFLICT REPLACE, value BLOB NOT NULL ON CONFLICT FAIL)`;
 
-export const Import = async (pathTo: string, data: {
-    cookes: ICookies,
-    localstorages: ILocalStorages,
-}) => {
+export const Import = async (pathTo: string, data: IData) => {
     await createDir(pathTo);
     // clear
     const localstoragePath = pathTo + "/Local Storage";
@@ -27,7 +24,7 @@ export const Import = async (pathTo: string, data: {
     const db = createDatabase(pathTo + "/Cookies");
     await db.run(CookiesTableCreationSQL);
     const cookiesSql = `insert into cookies values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-    for (const cookie of data.cookes) {
+    for (const cookie of data.cookies) {
         await db.run(cookiesSql,
             [cookie.creation_utc, cookie.host_key, cookie.name, cookie.value, cookie.path, cookie.expires_utc,
             cookie.secure, cookie.httponly, cookie.last_access_utc, cookie.has_expires,

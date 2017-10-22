@@ -21,21 +21,21 @@ const localstorageItem1 = {
     value: new Buffer("Val1"),
 };
 it("import test", async () => {
-    await Import(__dirname + "/../tmp", {
-        cookes: [cookie1],
+    await Import(__dirname + "/../__tmp__", {
+        cookies: [cookie1],
         localstorages: [{
             address: "addr1",
             items: [localstorageItem1],
         }],
     });
     // check cookies
-    let db = createDatabase(__dirname + "/../tmp/Cookies");
+    let db = createDatabase(__dirname + "/../__tmp__/Cookies");
     const cookies = await db.all(`select * from cookies`);
     expect(cookies.length).toBe(1);
     expect(cookies[0]).toEqual(cookie1);
     await db.close();
     // check localstorages
-    db = createDatabase(__dirname + "/../tmp/Local Storage/addr1_0.localstorage");
+    db = createDatabase(__dirname + "/../__tmp__/Local Storage/addr1_0.localstorage");
     const items = await db.all(`select * from ItemTable`);
     expect(items.length).toBe(1);
     expect(items[0]).toEqual(localstorageItem1);

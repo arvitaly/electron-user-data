@@ -1,3 +1,5 @@
+export { Import as import } from "./import";
+export { Export as export } from "./export";
 export type ICookies = ICookie[];
 export interface ICookie {
     creation_utc: number;
@@ -22,4 +24,8 @@ export interface ILocalStorage {
         key: string;
         value: Buffer;
     }>;
+}
+export interface IData {
+    cookies: ICookies;
+    localstorages: ILocalStorages;
 }
