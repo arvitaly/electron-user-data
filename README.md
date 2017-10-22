@@ -1,6 +1,6 @@
 # electron-user-data
 
-
+Lib for manipulation user data in Electron
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
@@ -11,7 +11,13 @@
 
 # Usage
 
-
+    ```typescript
+    import {import as Import, export as Export} from "electron-user-data";
+    //...
+    const data = await Import("...userData");
+    data.cookies[0][0].value = "Hi";
+    await Export("...userData2");
+    ```
 
 # API
 
